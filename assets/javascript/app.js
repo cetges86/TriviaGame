@@ -77,40 +77,49 @@ $(document).ready(function () {
                 correct: 'D: Patella',
             },
         ];
+
         //game displays a question with 4 answers
-        for (var i = 0; i < quizQuestions.length; i++) {
+        function displayQuestion() {
+            var answered = false;
+            if (!answered) {
+                for (var i = 0; i < quizQuestions.length; i++) {
+                    $('#question').html(quizQuestions[i].question);
+                    $('#answers').html('<li>A: ' + quizQuestions[i].answers.a + '</li><br>');
+                    $('#answers').append('<li>B: ' + quizQuestions[i].answers.b + '</li><br>');
+                    $('#answers').append('<li>C: ' + quizQuestions[i].answers.c + '</li><br>');
+                    $('#answers').append('<li>D: ' + quizQuestions[i].answers.d + '</li>');
+
+                    $('li').click(function (event) {
+                        var userAnswer = event.target.textContent;
+                        answered = true;
+                        console.log(quizQuestions[i]);
+                        console.log(userAnswer);
+                        if (userAnswer === quizQuestions[i].correct) {
+
+                            $('#message').html('<h1>You are correct!</h1>')
+                        } else {
+                            $('#message').html('<h1>Sorry! The correct answer was: </h1><br><h2>' + quizQuestions[i].correct + '</h2>');
+                        }
+                    })
 
 
-            $('#question').html(quizQuestions[i].question);
-            $('#answers').html('<li>A: ' + quizQuestions[i].answers.a + '</li><br>');
-            $('#answers').append('<li>B: ' + quizQuestions[i].answers.b + '</li><br>');
-            $('#answers').append('<li>C: ' + quizQuestions[i].answers.c + '</li><br>');
-            $('#answers').append('<li>D: ' + quizQuestions[i].answers.d + '</li>');
-            console.log(quizQuestions[i].correct);
-            click();
-
-            function click() {
-                $('li').click(function (event) {
-                    var userAnswer = event.target.textContent;
-                    if (userAnswer === quizQuestions[i].correct) {
-                        $('#message').html('<h1>You are correct!</h1>')
-                    } else {
-                        $('#message').html('<h1>Sorry! The correct answer was: </h1><br><h2>' + quizQuestions[i].correct + '</h2>');
-                    }
-                })
+                };
             };
-        }
+        };
 
 
-        //timer starts after question and answers are displayed
-
-        //user clicks on answer
-        //if right, display you are correct message and add to score
-
-        //if wrong, display you are wrong and correct answer, no change to score or deduct score
-
-        //if user doesn't click on anything, display same thing as above, maybe tweaking the message to reflect that they ran out of time
-
-        //this loop runs until there are no more questions
+        displayQuestion();
     });
+
+
+    //timer starts after question and answers are displayed
+
+    //user clicks on answer
+    //if right, display you are correct message and add to score
+
+    //if wrong, display you are wrong and correct answer, no change to score or deduct score
+
+    //if user doesn't click on anything, display same thing as above, maybe tweaking the message to reflect that they ran out of time
+
+    //this loop runs until there are no more questions
 });
