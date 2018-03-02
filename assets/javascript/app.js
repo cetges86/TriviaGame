@@ -4,6 +4,10 @@ $(document).ready(function () {
     $('#start').click(function () {
         //questions and answers, stored in an array full of objects
         $('#start').html('');
+
+        var time = 15;
+        var index = 0;
+
         //questions are stored in an array of objects, each object will have the question and the associated answers
         var quizQuestions = [
             {
@@ -77,37 +81,65 @@ $(document).ready(function () {
                 correct: 'D: Patella',
             },
         ];
-        
+
         //game displays a question with 4 answers
-        var index = 0;
+        var countdown = setInterval(timer, 1000);
+
         function displayQuestion() {
+            $('#message').html('')
             $('#question').html(quizQuestions[index].question);
             $('#answers').html('<li>A: ' + quizQuestions[index].answers.a + '</li><br>');
             $('#answers').append('<li>B: ' + quizQuestions[index].answers.b + '</li><br>');
             $('#answers').append('<li>C: ' + quizQuestions[index].answers.c + '</li><br>');
             $('#answers').append('<li>D: ' + quizQuestions[index].answers.d + '</li>');
             ready();
+            
+            //timer starts after question and answers are displayed
+        };
+
+        function timer() {
+            time--;
+            $('#timer').html('<h3>' + time + '</h3>');
+            if (time === 0) {
+                questionWrong();
+                time = 15;
+            };
         };
 
         function ready() {
             $('li').click(function (event) {
                 var userAnswer = event.target.textContent;
                 if (userAnswer === quizQuestions[index].correct) {
-                    $('#message').html('<h1>You are correct!</h1>')
-                    index++;
-                    setTimeout(displayQuestion(index),5000);
+                    questionRight();
                 } else {
-                    $('#message').html('<h1>Sorry! The correct answer was: </h1><br><h2>' + quizQuestions[index].correct + '</h2>');
-                    index++;
-                    setTimeout(displayQuestion(index),5000);
+                    questionWrong();
                 }
             })
         };
 
+        function questionRight() {
+            $('#message').html('<h1>You are correct!</h1>')
+            index++;
+            clearInterval(countdown);
+            setTimeout(displayQuestion, 2000);
+            time = 15;
+        }
+
+        function questionWrong() {
+            $('#message').html('<h1>Sorry! The correct answer was: </h1><br><h2>' + quizQuestions[index].correct + '</h2>');
+            index++;
+            clearInterval(countdown);
+            setTimeout(displayQuestion, 2000);
+            time = 15;
+        }
+
+
+
         displayQuestion();
 
 
-        //timer starts after question and answers are displayed
+
+
 
         //user clicks on answer
         //if right, display you are correct message and add to score
