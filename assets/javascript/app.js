@@ -5,8 +5,9 @@ $(document).ready(function () {
         //questions and answers, stored in an array full of objects
         $('#start').html('');
 
-        var time = 15;
         var index = 0;
+        var time = 15;
+        var score = 0;
 
         //questions are stored in an array of objects, each object will have the question and the associated answers
         var quizQuestions = [
@@ -82,30 +83,33 @@ $(document).ready(function () {
             },
         ];
 
+        var gifs = ['<iframe src="https://giphy.com/embed/GeWjRVP3UTXyM" width="480" height="269" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>',
+    '<iframe src="https://giphy.com/embed/dNKdHoT6yUsBW" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>','<iframe src="https://giphy.com/embed/l41m04gr7tRet7Uas" width="480" height="323" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>','<iframe src="https://giphy.com/embed/xT39D3KZkwVt3npbAk" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>','<iframe src="https://giphy.com/embed/FBMOHoG4L5g4" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>','<iframe src="https://giphy.com/embed/3o6Mbd7jEEv2SbWoz6" width="480" height="368" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>','<iframe src="https://giphy.com/embed/y335xyKYQGrja" width="480" height="240" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>','<iframe src="https://giphy.com/embed/SIPIe590rx6iA" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>']
+
         //game displays a question with 4 answers
-        var countdown = setInterval(timer, 1000);
 
         function displayQuestion() {
-            $('#message').html('')
+            $('#message').empty();
+            $('#gif').empty();
             $('#question').html(quizQuestions[index].question);
             $('#answers').html('<li>A: ' + quizQuestions[index].answers.a + '</li><br>');
             $('#answers').append('<li>B: ' + quizQuestions[index].answers.b + '</li><br>');
             $('#answers').append('<li>C: ' + quizQuestions[index].answers.c + '</li><br>');
             $('#answers').append('<li>D: ' + quizQuestions[index].answers.d + '</li>');
             ready();
-            
             //timer starts after question and answers are displayed
         };
 
-        function timer() {
+        function startTimer() {
             time--;
-            $('#timer').html('<h3>' + time + '</h3>');
             if (time === 0) {
                 questionWrong();
-                time = 15;
-            };
+            } else if (time<=15){
+                $('#timer').html('<h3>Time Remaining: ' + time + '</h3>');
+            }
         };
 
+        //user clicks on answer
         function ready() {
             $('li').click(function (event) {
                 var userAnswer = event.target.textContent;
@@ -117,32 +121,55 @@ $(document).ready(function () {
             })
         };
 
+        //if right, display you are correct message and add to score
         function questionRight() {
-            $('#message').html('<h1>You are correct!</h1>')
+            $('#message').html('<h1>You are correct!</h1>');
+            displayGif();
+            score++;
             index++;
-            clearInterval(countdown);
-            setTimeout(displayQuestion, 2000);
-            time = 15;
-        }
+            if (index >= quizQuestions.length) {
+                setTimeout(gameOver, 5000);
+            } else {
+                setTimeout(displayQuestion, 5000);
+                time = 20;
+            };
+        };
 
         function questionWrong() {
             $('#message').html('<h1>Sorry! The correct answer was: </h1><br><h2>' + quizQuestions[index].correct + '</h2>');
+            displayGif();
             index++;
-            clearInterval(countdown);
-            setTimeout(displayQuestion, 2000);
-            time = 15;
+            if (index >= quizQuestions.length) {
+                gameOver(score);
+            } else {
+                setTimeout(displayQuestion, 5000);
+                time = 20;
+            };
+        };
+
+        function gameOver(){
+            var finalScore = ((score / 7) * 100).toFixed(2);
+            $('#question').empty();
+            $('#answers').empty();
+            $('#timer').empty();
+            clearInterval(startTimer);
+            $('#gif').html(gifs[7]);
+            $('#message').html(`<h1>Your final score was: ${score} out of 7, or ${finalScore} %</h1`)
+
         }
 
-
+        function displayGif(){
+            $('#gif').html(gifs[index]);
+        };
 
         displayQuestion();
+        setInterval(startTimer, 1000);
 
 
 
 
 
-        //user clicks on answer
-        //if right, display you are correct message and add to score
+
 
         //if wrong, display you are wrong and correct answer, no change to score or deduct score
 
