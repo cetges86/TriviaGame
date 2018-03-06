@@ -89,7 +89,9 @@ $(document).ready(function () {
             clearInterval(startTimer);
             $('#gif').html(data.gifs[10]);
             $('#message').html(`<h1>Your final score was: ${score} out of ${data.questions.length}, or ${finalScore} %</h1>`);
+            if (parseInt(finalScore) >= 70){
             setTimeout(bonus,5000);
+            }
             return;
         }
 
