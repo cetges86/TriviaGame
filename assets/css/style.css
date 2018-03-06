@@ -1,0 +1,47 @@
+body {
+    background-color: black;
+    font-family: 'Poppins',Arial, Helvetica, sans-serif;
+}
+.jumbotron{
+    color: #8b0000;
+    opacity: .95;
+}
+
+h1 {
+    font-family: 'Coiny', Arial, Helvetica, sans-serif;
+    color: #8b0000;
+}
+span {
+    font-size:5em;
+}
+
+#display {
+    display: none;
+}
+
+#question {
+    font-size: 23px;
+}
+
+#timer {
+    font-family: 'Coiny', Arial, Helvetica, sans-serif;
+    color:white;
+}
+
+#message h1,h2 {
+    color: powderblue;
+}
+
+.btn {
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.btn-lg {
+    font-size: 26px;
+}
+
+iframe {
+   border:1px solid white;
+}
+
