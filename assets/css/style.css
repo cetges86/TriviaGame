@@ -12,7 +12,7 @@ h1 {
     color: #8b0000;
 }
 span {
-    font-size:5em;
+    font-size:4em;
 }
 
 #display {
@@ -26,6 +26,11 @@ span {
 #timer {
     font-family: 'Coiny', Arial, Helvetica, sans-serif;
     color:white;
+}
+
+#message p {
+    font-size: 2em;
+    color:powderblue;
 }
 
 #message h1,h2 {

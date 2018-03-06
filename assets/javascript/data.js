@@ -112,6 +112,7 @@ var data = {
             "<iframe src='https://giphy.com/embed/4xpB3eE00FfBm' width='480' height='458' frameBorder='0' class='giphy-embed' allowFullScreen></iframe>",
             "<iframe src='https://giphy.com/embed/ncsQI9sF3pa8w' width='480' height='443' frameBorder='0' class='giphy-embed' allowFullScreen></iframe>",
             "<iframe src='https://giphy.com/embed/l2Jec66NKREEw7JsY' width='480' height='368' frameBorder='0' class='giphy-embed' allowFullScreen></iframe>",
-            "<iframe src='https://giphy.com/embed/SIPIe590rx6iA' width='480' height='480' frameBorder='0' class='giphy-embed' allowFullScreen></iframe>"
+            "<iframe src='https://giphy.com/embed/SIPIe590rx6iA' width='480' height='480' frameBorder='0' class='giphy-embed' allowFullScreen></iframe>",
+            "<iframe width='560' height='315' src='https://www.youtube.com/embed/F8VzZe1FqEM' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>"
         ]
     }
