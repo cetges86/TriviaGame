@@ -63,7 +63,7 @@ $(document).ready(function () {
         };
 
         function questionWrong() {
-            $('#timer').hide();
+            $('#timer').empty();
             $('#display').hide();
             $('#message').html('<h1>Oh no! The correct answer was: </h1><br><h2>' + data.questions[index].correct + '</h2>');
             displayGif();
